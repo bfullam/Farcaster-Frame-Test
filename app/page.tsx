@@ -4,7 +4,6 @@ import {
   FrameImage,
   FrameReducer,
   NextServerPageProps,
-  getFrameMessage,
   getPreviousFrame,
   useFramesReducer,
 } from "frames.js/next/server";
@@ -27,13 +26,6 @@ const reducer: FrameReducer<State> = (state, action) => {
 
 export default async function Page({ searchParams }: NextServerPageProps) {
   const previousFrame = getPreviousFrame<State>(searchParams);
-
-  const frameMessage = await getFrameMessage(previousFrame.postBody);
-
-  if (frameMessage && !frameMessage?.isValid) {
-    throw new Error("Invalid frame payload");
-  }
-
   const [state] = useFramesReducer<State>(
     reducer,
     initialState,
