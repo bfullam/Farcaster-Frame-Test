@@ -7,6 +7,9 @@ export async function POST(
   if (process.env.TO_ADDRESS === undefined) {
     throw new Error("Missing TO_ADDRESS environment variable");
   }
+  if (process.env.TRANSACTION_VALUE === undefined) {
+    throw new Error("Missing TRANSACTION_VALUE environment variable");
+  }
 
   return NextResponse.json({
     chainId: "eip155:84532", // Base Sepolia Testnet
@@ -14,7 +17,7 @@ export async function POST(
     params: {
       abi: [],
       to: `0x${process.env.TO_ADDRESS}`,
-      value: "50000000000000",
+      value: process.env.TRANSACTION_VALUE,
     },
   });
 }
