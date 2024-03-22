@@ -17,7 +17,7 @@ export async function POST(
     params: {
       abi: [],
       to: `0x${process.env.TO_ADDRESS}`,
-      value: process.env.TRANSACTION_VALUE,
+      value: "50000000000000",
     },
   });
 }
