@@ -14,7 +14,7 @@ export async function POST(
     params: {
       abi: [],
       to: `0x${process.env.TO_ADDRESS}`,
-      value: "100000000000000",
+      value: "50000000000000",
     },
   });
 }
