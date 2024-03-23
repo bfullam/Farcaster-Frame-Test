@@ -8,35 +8,22 @@ import {
   useFramesReducer,
 } from "frames.js/next/server";
 
-type State = {
-  recentButtonIndex: string | null;
-  total_button_presses: number;
-};
-
-const initialState = { recentButtonIndex: null, total_button_presses: 0 };
-
-const reducer: FrameReducer<State> = (state, action) => {
-  console.log(state, action);
-  return {
-    total_button_presses: state.total_button_presses + 1,
-    recentButtonIndex: action.postBody?.untrustedData.buttonIndex
-    ? String(action.postBody?.untrustedData.buttonIndex)
-    : null,  };
-};
+type State = {};
+const reducer: FrameReducer<State> = (state, action) => ({});
 
 export default async function Page({ searchParams }: NextServerPageProps) {
   const previousFrame = getPreviousFrame<State>(searchParams);
   const [state] = useFramesReducer<State>(
     reducer,
-    initialState,
+    {},
     previousFrame
   );
 
   return (
     <div className="p-4">
       <FrameContainer
-        postUrl="/frames"
-        pathname="/"
+        postUrl="/[frameID]/frames"
+        pathname="/[frameID]"
         state={state}
         previousFrame={previousFrame}
       >
@@ -45,7 +32,7 @@ export default async function Page({ searchParams }: NextServerPageProps) {
             Awesome Product
           </div>
         </FrameImage>
-        <FrameButton action="tx" target="/txdata">
+        <FrameButton action="tx" target="/[frameID]/txdata">
           Buy now 🎁
         </FrameButton>
       </FrameContainer>
