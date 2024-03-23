@@ -2,7 +2,10 @@
 import { Button } from "frames.js/next";
 import { createFrames } from "frames.js/next";
 
-const frames = createFrames();
+const frames = createFrames({
+  basePath: "/[frameID]",
+});
+
 const handleRequest = frames(async (ctx) => {
   if (ctx.message?.transactionId) {
     return {

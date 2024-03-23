@@ -13,7 +13,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     other: {
       ...(await fetchMetadata(
         new URL(
-          `/test/frames`,
+          `/${params.frameID}/frames`,
           vercelURL() || "http://localhost:3001"
         )
       )),
