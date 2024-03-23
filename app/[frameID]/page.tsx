@@ -6,6 +6,7 @@ type Props = {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  console.log(process.env.VERCEL_URL);
   return {
     title: "Ecommerce Frame",
     description: "This is an ecommerce Frame",
