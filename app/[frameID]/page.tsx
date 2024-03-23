@@ -1,41 +1,25 @@
-import {
-  FrameButton,
-  FrameContainer,
-  FrameImage,
-  FrameReducer,
-  NextServerPageProps,
-  getPreviousFrame,
-  useFramesReducer,
-} from "frames.js/next/server";
+import type { Metadata } from "next";
+import { fetchMetadata } from "frames.js/next";
 
-type State = {};
-const reducer: FrameReducer<State> = (state, action) => ({});
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: "Ecommerce Frame",
+    description: "This is an ecommerce Frame",
+    other: {
+      ...(await fetchMetadata(
+        new URL(
+          "/[frameID]/frames",
+          process.env.vercelURL || "http://localhost:3001"
+        )
+      )),
+    },
+  };
+}
 
-export default async function Page({ searchParams }: NextServerPageProps) {
-  const previousFrame = getPreviousFrame<State>(searchParams);
-  const [state] = useFramesReducer<State>(
-    reducer,
-    {},
-    previousFrame
-  );
-
+export default async function Home() {
   return (
-    <div className="p-4">
-      <FrameContainer
-        postUrl="/[frameID]/frames"
-        pathname="/[frameID]"
-        state={state}
-        previousFrame={previousFrame}
-      >
-        <FrameImage aspectRatio="1:1">
-          <div tw="bg-purple-800 text-white w-full h-full justify-center items-center">
-            Awesome Product
-          </div>
-        </FrameImage>
-        <FrameButton action="tx" target="/[frameID]/txdata">
-          Buy now 🎁
-        </FrameButton>
-      </FrameContainer>
+    <div>
+      Ecommerce Frame
     </div>
   );
 }
