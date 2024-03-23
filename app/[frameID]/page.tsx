@@ -1,15 +1,19 @@
 import type { Metadata } from "next";
 import { fetchMetadata } from "frames.js/next";
 
-export async function generateMetadata(): Promise<Metadata> {
+type Props = {
+  params: { frameID: string }
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: "Ecommerce Frame",
     description: "This is an ecommerce Frame",
     other: {
       ...(await fetchMetadata(
         new URL(
-          "/[frameID]/frames",
-          process.env.VERCEL_URL ? process.env.VERCEL_URL : "http://localhost:3001"
+          `/${params.frameID}/frames`,
+          process.env.VERCEL_URL || "http://localhost:3001"
         )
       )),
     },
