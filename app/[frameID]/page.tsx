@@ -9,7 +9,7 @@ export async function generateMetadata(): Promise<Metadata> {
       ...(await fetchMetadata(
         new URL(
           "/[frameID]/frames",
-          process.env.vercelURL || "http://localhost:3001"
+          process.env.VERCEL_URL || "http://localhost:3001"
         )
       )),
     },
