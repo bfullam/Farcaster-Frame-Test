@@ -21,18 +21,20 @@ export default async function Home() {
   }
 
   return (
-    <form action={submitForm}>
-      <h1 className="text-sm font-bold underline">Hello world!</h1>
-      <h1 className="flex">Upload Image</h1>
-      <input type="file" id="image" name="image" required />
-      <h1>Set Wallet Address</h1>
-      <input type="text" id="wallet" name="wallet"></input>
-      <h1>Set Product Price in ETH</h1>
-      <input type="text" id="price" name="price"></input>
-      <br />
-      <br />
-      <br />
-      <button type="submit">Submit</button>
-    </form>
+    <div className="flex justify-center items-center pt-10">
+      <form action={submitForm}>
+        <h1 className="text-2xl font-semibold">Create your Frame</h1>
+        <h1 className="text-lg font-semibold pt-10">Upload Image</h1>
+        <input type="file" id="image" name="image" required />
+        <h1>Set Wallet Address</h1>
+        <input type="text" id="wallet" name="wallet"></input>
+        <h1>Set Product Price in ETH</h1>
+        <input type="text" id="price" name="price"></input>
+        <br />
+        <br />
+        <br />
+        <button type="submit">Submit</button>
+      </form>
+    </div>
   );
 }
