@@ -1,6 +1,11 @@
 import { put } from '@vercel/blob';
 import { sql } from '@vercel/postgres';
 import { revalidatePath } from 'next/cache';
+
+export const metadata = {
+  title: 'Ecommerce Frame',
+  description: '...',
+};
  
 export default async function Home() {
     async function submitForm(formData: FormData) {
