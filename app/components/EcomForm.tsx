@@ -3,6 +3,7 @@
 import { type PutBlobResult } from "@vercel/blob";
 import { upload } from "@vercel/blob/client";
 import { useState, useRef } from "react";
+import EcomSVG from "./EcomSVG";
 
 export default function EcomForm() {
   const inputFileRef = useRef<HTMLInputElement>(null);
@@ -11,8 +12,8 @@ export default function EcomForm() {
   const [blob, setBlob] = useState<PutBlobResult | null>(null);
   const [fileName, setFileName] = useState("");
 
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files && event.target.files[0];
     if (file) {
       setFileName(file.name);
     }
@@ -22,8 +23,8 @@ export default function EcomForm() {
     <div className="flex justify-center">
       <div className="flex flex-col justify-center items-center space-y-5">
         <div className="text-2xl font-bold">Create Shopping Frame</div>
-        <div className="bg-[#705adc] p-3 w-[70rem] rounded-lg">
-          <div className="outline-dashed outline-white outline-2 p-7 rounded-lg">
+        <div className="bg-[#7961F2] p-3 w-[70rem] rounded-lg">
+          <div className="outline-dashed outline-white bg-[#705ADC] outline-2 p-7 rounded-lg">
             <div className="flex justify-center">
               <form
                 onSubmit={async (event) => {
@@ -63,6 +64,7 @@ export default function EcomForm() {
                 }}
               >
                 <div>
+                  <EcomSVG />
                   <label
                     className="flex w-fit items-center space-x-2 cursor-pointer px-4 py-2 bg-white font-bold text-md rounded"
                     htmlFor="hidden-file-input"
@@ -81,7 +83,7 @@ export default function EcomForm() {
                         d="M2.25 15.75l5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
                       />
                     </svg>
-                    <div>UPLOAD FILE</div>
+                    <div>UPLOAD PRODUCT IMAGE</div>
                   </label>
                   <input
                     id="hidden-file-input"
