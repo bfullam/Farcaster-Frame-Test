@@ -1,5 +1,6 @@
 'use client';
  
+import { useDynamicContext } from '@dynamic-labs/sdk-react-core';
 import { type PutBlobResult } from '@vercel/blob';
 import { upload } from '@vercel/blob/client';
 import { useState, useRef } from 'react';
@@ -9,6 +10,7 @@ export default function EcomForm() {
   const inputWalletRef = useRef<HTMLInputElement>(null);
   const inputPriceRef = useRef<HTMLInputElement>(null);
   const [blob, setBlob] = useState<PutBlobResult | null>(null);
+  const {primaryWallet} = useDynamicContext();
   return (
     <>
       <h1>Upload Your Avatar</h1>
@@ -39,6 +41,7 @@ export default function EcomForm() {
             imageUrl: blob.url,
             receivingWallet: inputWalletRef.current.value,
             price: inputPriceRef.current.value,
+            ownerWallet: primaryWallet?.address,
           };
     
           await fetch('/api/form/uploadFrame', {

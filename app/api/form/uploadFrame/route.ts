@@ -6,7 +6,7 @@ export async function POST(request: Request): Promise<NextResponse> {
   const body = await request.json();
  
   try {
-    await sql`INSERT INTO FRAMES (imageurl, receivingwallet, price) VALUES (${body.imageUrl}, ${body.receivingWallet}, ${body.price}) RETURNING *;`;
+    await sql`INSERT INTO FRAMES (imageurl, receivingwallet, price, ownerwallet) VALUES (${body.imageUrl}, ${body.receivingWallet}, ${body.price}, ${body.ownerWallet}) RETURNING *;`;
  
     return NextResponse.json({ message: 'Frame uploaded'});
   } catch (error) {
