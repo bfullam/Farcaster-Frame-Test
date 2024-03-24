@@ -3,8 +3,8 @@ import { fetchMetadata } from "frames.js/next";
 import { vercelURL } from "../utils";
 
 type Props = {
-  params: { frameID: string }
-}
+  params: { frameID: string };
+};
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
@@ -22,9 +22,5 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function Home() {
-  return (
-    <div>
-      Ecommerce Frame
-    </div>
-  );
+  return <div>Ecommerce Frame</div>;
 }
