@@ -1,13 +1,20 @@
 import { TransactionTargetResponse } from "frames.js";
 import { NextRequest, NextResponse } from "next/server";
+import { sql } from '@vercel/postgres';
 
 export async function POST(
   req: NextRequest
 ): Promise<NextResponse<TransactionTargetResponse>> {
-  if (process.env.TO_ADDRESS === undefined) {
+  // Get the frame ID from the request URL
+  const frameID = req.nextUrl.pathname.split('/')[1];
+
+  // Get frame data from the database
+  const {rows} = await sql`SELECT * FROM frames WHERE frameid = ${frameID}`;
+  const frameData = rows[0];
+  if (!frameData.receivingwallet) {
     throw new Error("Missing TO_ADDRESS environment variable");
   }
-  if (process.env.TRANSACTION_VALUE === undefined) {
+  if (!frameData.price) {
     throw new Error("Missing TRANSACTION_VALUE environment variable");
   }
 
@@ -16,8 +23,8 @@ export async function POST(
     method: "eth_sendTransaction",
     params: {
       abi: [],
-      to: `0x${process.env.TO_ADDRESS}`,
-      value: process.env.TRANSACTION_VALUE,
+      to: frameData.receivingwallet,
+      value: frameData.price,
     },
   });
 }

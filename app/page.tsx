@@ -10,13 +10,13 @@ export default async function Home() {
         const blob = await put(imageFile.name, imageFile, {
             access: 'public',
         });
-        console.log(blob);
         revalidatePath('/');
 
         // Add DB entry with image URL and form data
         const receivingWallet = formData.get('wallet') as string;
         const price = formData.get('price') as string;
-        await sql`INSERT INTO FRAMES (imageurl, receivingwallet, price) VALUES (${blob.url}, ${receivingWallet}, ${price});`;
+        const frameInsertionResult = await sql`INSERT INTO FRAMES (imageurl, receivingwallet, price) VALUES (${blob.url}, ${receivingWallet}, ${price}) RETURNING *;`;
+        console.log(frameInsertionResult.rows[0]);
     }
      
     return (
