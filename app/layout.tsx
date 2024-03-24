@@ -15,7 +15,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <div className="flex flex-row items-center pl-10 p-5 space-x-5">
+        <div className="flex flex-row items-center pl-10 p-3 space-x-5 border border-b border-gray-300">
           <div className="flex flex-row items-center space-x-1">
             <Image
               src="/flames.jpg" // The path to your image
@@ -23,15 +23,15 @@ export default function RootLayout({
               width={40} // Desired width of the image (can be changed)
               height={20} // Desired height of the image (can be changed)
             />
-            <div className="text-lg font-semibold">flames</div>
+            <div className="text-lg font-semibold">Flames</div>
           </div>
 
           <Link href="/" passHref>
-            <span className="font-semibold pl-5">create</span>{" "}
+            <span className="font-semibold pl-5">Create</span>{" "}
             {/* Add Link and a tags */}
           </Link>
           <Link href="/manage" passHref>
-            <span className="font-semibold">manage</span>{" "}
+            <span className="font-semibold">Manage</span>{" "}
             {/* Add Link and a tags */}
           </Link>
         </div>
