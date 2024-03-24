@@ -25,7 +25,7 @@ export default function EcomForm() {
         <div className="text-2xl font-bold">Create Shopping Frame</div>
         <div className="bg-[#7961F2] p-3 w-[70rem] rounded-lg">
           <div className="outline-dashed outline-white bg-[#705ADC] outline-2 p-7 rounded-lg">
-            <div className="flex justify-center">
+            <div className="flex justify-center pt-8">
               <form
                 onSubmit={async (event) => {
                   event.preventDefault();
@@ -63,7 +63,7 @@ export default function EcomForm() {
                   });
                 }}
               >
-                <div>
+                <div className="pb-8">
                   <EcomSVG />
                   <label
                     className="flex w-fit items-center space-x-2 cursor-pointer px-4 py-2 bg-white font-bold text-md rounded"
@@ -93,48 +93,50 @@ export default function EcomForm() {
                     onChange={handleFileChange}
                   />
                   {fileName && (
-                    <span className="text-sm pt-2 font-medium text-white">
-                      {fileName}
-                    </span>
+                    <div className="">
+                      <span className="text-sm pt-2 font-medium text-white">
+                        {fileName}
+                      </span>
+                      <input
+                        id="hidden-file-input"
+                        name="file"
+                        ref={inputFileRef}
+                        type="file"
+                        required
+                        className="hidden"
+                      />
+
+                      <div className="text-white font-medium pt-3">
+                        Set Wallet Address
+                      </div>
+                      <input
+                        type="text"
+                        id="wallet"
+                        name="wallet"
+                        ref={inputWalletRef}
+                        className="focus:outline-none focus:ring-0 rounded"
+                      ></input>
+
+                      <div className="text-white pt-3 font-medium">
+                        Set Product Price in ETH
+                      </div>
+                      <input
+                        type="text"
+                        id="price"
+                        name="price"
+                        ref={inputPriceRef}
+                        className="focus:outline-none focus:ring-0 rounded"
+                      ></input>
+                      <div className="pt-3">
+                        <button
+                          className="bg-white font-bold text-black text-md rounded-lg p-1 px-2"
+                          type="submit"
+                        >
+                          Submit
+                        </button>
+                      </div>
+                    </div>
                   )}
-                </div>
-                <input
-                  id="hidden-file-input"
-                  name="file"
-                  ref={inputFileRef}
-                  type="file"
-                  required
-                  className="hidden"
-                />
-
-                <div className="text-white font-medium pt-3">
-                  Set Wallet Address
-                </div>
-                <input
-                  type="text"
-                  id="wallet"
-                  name="wallet"
-                  ref={inputWalletRef}
-                  className="focus:outline-none focus:ring-0 rounded"
-                ></input>
-
-                <div className="text-white pt-3 font-medium">
-                  Set Product Price in ETH
-                </div>
-                <input
-                  type="text"
-                  id="price"
-                  name="price"
-                  ref={inputPriceRef}
-                  className="focus:outline-none focus:ring-0 rounded"
-                ></input>
-                <div className="pt-3">
-                  <button
-                    className="bg-white font-bold text-black text-md rounded-lg p-1 px-2"
-                    type="submit"
-                  >
-                    Submit
-                  </button>
                 </div>
               </form>
             </div>
