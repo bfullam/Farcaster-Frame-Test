@@ -5,7 +5,9 @@ import { sql } from '@vercel/postgres';
 
 const frames = createFrames();
 const handleRequest = frames(async (ctx) => {
+  const dynamicRoute = `${ctx.url.pathname.split("/")[1]}`;
   if (ctx.message?.transactionId) {
+    await sql`UPDATE FRAMES SET customers = ARRAY_APPEND(customers, ${ctx.message.requesterFid}) WHERE frameid = ${dynamicRoute} RETURNING *;`;
     return {
       image: (
         <div tw="bg-purple-800 text-white w-full h-full justify-center items-center flex">
@@ -39,7 +41,7 @@ const handleRequest = frames(async (ctx) => {
       aspectRatio: "1:1",
     },
     buttons: [
-      <Button action="tx" target={`/${ctx.url.pathname.split("/")[1]}/txdata`} post_url="/frames">
+      <Button action="tx" target={`/${dynamicRoute}/txdata`} post_url={`/${dynamicRoute}/frames`}>
         Buy now 🎁
       </Button>,
     ],
