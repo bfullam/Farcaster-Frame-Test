@@ -4,12 +4,11 @@ import { NextResponse } from 'next/server';
  
 export async function POST(request: Request): Promise<NextResponse> {
   const body = await request.json();
-  console.log(body);
  
   try {
-    // const frameInsertionResult = await sql`INSERT INTO FRAMES (imageurl, receivingwallet, price) VALUES (${blob.url}, ${inputWalletRef.current.value}, ${inputPriceRef.current.value}) RETURNING *;`;
+    await sql`INSERT INTO FRAMES (imageurl, receivingwallet, price) VALUES (${body.imageUrl}, ${body.receivingWallet}, ${body.price}) RETURNING *;`;
  
-    return NextResponse.json({ message: 'Frame uploaded' });
+    return NextResponse.json({ message: 'Frame uploaded'});
   } catch (error) {
     return NextResponse.json(
       { error: (error as Error).message },

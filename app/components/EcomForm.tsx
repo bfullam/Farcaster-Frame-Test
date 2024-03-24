@@ -2,7 +2,6 @@
  
 import { type PutBlobResult } from '@vercel/blob';
 import { upload } from '@vercel/blob/client';
-import { sql } from '@vercel/postgres';
 import { useState, useRef } from 'react';
  
 export default function EcomForm() {
@@ -36,14 +35,19 @@ export default function EcomForm() {
           });
           setBlob(blob);
 
-          const frameInsertionResult = await upload(file.name, file, {
-            access: 'public',
-            handleUploadUrl: '/api/form/upload',
+          const postData = {
+            imageUrl: blob.url,
+            receivingWallet: inputWalletRef.current.value,
+            price: inputPriceRef.current.value,
+          };
+    
+          await fetch('/api/form/uploadFrame', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(postData),
           });
-
-          // Add DB entry with image URL and form data
-          const frameInsertionResult = await sql`INSERT INTO FRAMES (imageurl, receivingwallet, price) VALUES (${blob.url}, ${inputWalletRef.current.value}, ${inputPriceRef.current.value}) RETURNING *;`;
-          console.log(frameInsertionResult.rows[0]);
         }}
       >
         <input name="file" ref={inputFileRef} type="file" required />
