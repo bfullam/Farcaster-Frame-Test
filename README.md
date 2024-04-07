@@ -1,4 +1,4 @@
-This repo is heavily inspired by and gives credit to [a-frame-in-100-lines by Zizzamia](https://github.com/Zizzamia/a-frame-in-100-lines)
+This repo is "Flames", a no-code tool for creating Farcaster frames created as a submission for the ETH Global Frameworks 2024 hackathon.
 
 ## Getting Started
 
